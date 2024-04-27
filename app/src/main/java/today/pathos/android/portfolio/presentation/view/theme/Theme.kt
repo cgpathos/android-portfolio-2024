@@ -1,4 +1,4 @@
-package today.pathos.android.portfolio.ui.theme
+package today.pathos.android.portfolio.presentation.view.theme
 
 import android.app.Activity
 import android.os.Build

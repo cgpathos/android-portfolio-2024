@@ -1,28 +1,56 @@
 [versions]
 agp = "8.3.2"
+
+ksp = "1.9.23-1.0.19"
 kotlin = "1.9.23"
+kotlinxDatetime = "0.5.0"
+kotlinxSerializationJson = "1.6.3"
 
-coreKtx = "1.12.0"
+hilt = "2.50"
+hiltNavigation = "1.2.0"
 
-lifecycleRuntimeKtx = "2.7.0"
-activityCompose = "1.8.2"
-composeBom = "2024.04.00"
+coreKtx = "1.13.0"
+
+lifecycleRuntime = "2.7.0"
+activityCompose = "1.9.0"
+
+navigationCompose = "2.7.7"
+composeBom = "2024.04.01"
 composeKotlinCompiler = "1.5.11"
+
+room = "2.6.1"
+dataStore = "1.1.0"
 
 junit = "4.13.2"
 junitExt = "1.1.5"
 espressoCore = "3.5.1"
+mockk = "1.13.10"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 junit = { module = "junit:junit", version.ref = "junit" }
 
-kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
 
-androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigation" }
+
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntime" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntime" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-ui = { module = "androidx.compose.ui:ui" }
@@ -30,21 +58,34 @@ androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-material3 = { module = "androidx.compose.material3:material3" }
+androidx-material3-windowSizeClass = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
 androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigationCompose" }
 
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
 
 [bundles]
-kotlin = ["kotlinx-coroutines-core"]
+kotlin = ["kotlinx-coroutines-core", "kotlinx-datetime", "kotlinx-serialization"]
 kotlin-test = ["kotlinx-coroutines-test"]
 
-compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3"]
-compose-android-test = ["androidx-ui-test-junit4"]
+compose = [
+    "androidx-navigation-compose", "androidx-hilt-navigation-compose",
+    "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview",
+    "androidx-material3", "androidx-material3-windowSizeClass",
+    "androidx-ui-text-google-fonts"
+]
+compose-android-test = ["androidx-ui-test-junit4", "androidx-navigation-testing"]
 compose-ui-test = ["androidx-ui-tooling", "androidx-ui-test-manifest"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

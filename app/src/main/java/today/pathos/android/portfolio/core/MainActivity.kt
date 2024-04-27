@@ -1,4 +1,4 @@
-package today.pathos.android.portfolio
+package today.pathos.android.portfolio.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,8 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import today.pathos.android.portfolio.ui.theme.TemplateAndroidTheme
+import dagger.hilt.android.AndroidEntryPoint
+import today.pathos.android.portfolio.presentation.view.theme.TemplateAndroidTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

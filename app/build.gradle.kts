@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -12,7 +15,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,6 +36,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -46,6 +50,14 @@ android {
 }
 
 dependencies {
+    // hilt
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
+    androidTestImplementation(libs.dagger.hilt.android.testing)
+    kspAndroidTest(libs.dagger.hilt.android.compiler)
+    testImplementation(libs.dagger.hilt.android.testing)
+    kspTest(libs.dagger.hilt.android.compiler)
+
     // kotlin
     implementation(libs.bundles.kotlin)
     testImplementation(libs.bundles.kotlin.test)
@@ -53,7 +65,16 @@ dependencies {
     implementation(libs.core.ktx)
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
+
+    // room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
+
+    implementation(libs.androidx.datastore)
 
     // compose
     implementation(platform(libs.androidx.compose.bom))
@@ -62,8 +83,8 @@ dependencies {
     androidTestImplementation(libs.bundles.compose.android.test)
     debugImplementation(libs.bundles.compose.ui.test)
 
+    // test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 }
