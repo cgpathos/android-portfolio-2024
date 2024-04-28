@@ -23,6 +23,8 @@ composeKotlinCompiler = "1.5.11"
 retrofit = "2.11.0"
 okhttp3 = "4.12.0"
 
+coil = "2.5.0"
+
 room = "2.6.1"
 dataStore = "1.1.0"
 
@@ -54,6 +56,8 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 retrofit-converter-kotlin-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
 retrofit-interceptor-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp3" }
+
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
@@ -89,7 +93,8 @@ compose = [
     "androidx-navigation-compose", "androidx-hilt-navigation-compose",
     "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview",
     "androidx-material3", "androidx-material3-windowSizeClass",
-    "androidx-ui-text-google-fonts"
+    "androidx-ui-text-google-fonts",
+    "coil"
 ]
 compose-android-test = ["androidx-ui-test-junit4", "androidx-navigation-testing"]
 compose-ui-test = ["androidx-ui-tooling", "androidx-ui-test-manifest"]
