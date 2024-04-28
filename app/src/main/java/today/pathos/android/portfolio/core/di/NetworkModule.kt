@@ -37,6 +37,19 @@ object NetworkModule {
                         }
                     }
             )
+            .addInterceptor { chain ->
+                val original = chain.request()
+                val originalHttpUrl = original.url
+
+                val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("apikey", BuildConfig.API_KEY)
+                    .build()
+
+                chain.proceed(
+                    original.newBuilder().url(url)
+                        .build()
+                )
+            }
             .build()
 
     @Singleton
