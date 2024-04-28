@@ -14,6 +14,11 @@ class NetworkDataSource @Inject constructor(
 ) {
     suspend fun getServerList(): ResRows<ResServer> = apiService.getServerList()
 
+    suspend fun getCharacterFame(
+        serverId: String = "all",
+        limit: Int = 200,
+    ): ResRows<ResCharacter> = apiService.getCharacterFame(serverId, limit)
+
     suspend fun searchCharacter(
         serverId: String,
         characterName: String,

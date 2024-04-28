@@ -78,6 +78,8 @@ androidx-navigation-testing = { module = "androidx.navigation:navigation-testing
 
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk" }
 
 [bundles]
 kotlin = ["kotlinx-coroutines-core", "kotlinx-datetime", "kotlinx-serialization"]

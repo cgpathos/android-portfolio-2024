@@ -12,6 +12,12 @@ interface DNFService {
     @GET("servers/")
     suspend fun getServerList(): ResRows<ResServer>
 
+    @GET("servers/{serverId}/characters-fame")
+    suspend fun getCharacterFame(
+        @Path("serverId") serverId: String,
+        @Query("limit") limit: Int,
+    ): ResRows<ResCharacter>
+
     @GET("servers/{serverId}/characters/{characterId}")
     suspend fun searchCharacter(
         @Path("serverId") serverId: String,

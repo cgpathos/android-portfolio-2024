@@ -85,6 +85,23 @@ class NetworkDataSourceTest {
     }
 
     @Test
+    fun getCharacterFame() = runTest {
+        mockServerRule.enqueue("getCharacterFame.json")
+
+        val serverId = "all"
+        val expectedServerCount = 2
+        val expectedFirstCharacterName = "사용자이름"
+
+        val result = dataSource.getCharacterFame(
+            serverId = serverId,
+            limit = 200
+        )
+
+        assertEquals(expectedServerCount, result.rows.size)
+        assertEquals(expectedFirstCharacterName, result.rows.first().characterName)
+    }
+
+    @Test
     fun searchCharacter() = runTest {
         mockServerRule.enqueue("searchCharacter.json")
 
