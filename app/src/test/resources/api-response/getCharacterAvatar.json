@@ -1,0 +1,247 @@
+{
+  "characterId": "SERVER_ID",
+  "characterName": "사용자이름",
+  "level": 100,
+  "jobId": "123456",
+  "jobGrowId": "123456",
+  "jobName": "귀검사(남)",
+  "jobGrowName": "블러드 이블",
+  "adventureName": "모험단",
+  "guildId": "123456",
+  "guildName": "길드이름",
+  "avatar": [
+    {
+      "slotId": "HEADGEAR",
+      "slotName": "모자 아바타",
+      "itemId": "3bd48b7a41985ad02bd07ec91dcf04a8",
+      "itemName": "레어 모자 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "d5d8845ac53962799cb16d6776eb6444",
+        "itemName": "고스트 헌터의 깃장식 중절모[C타입]"
+      },
+      "optionAbility": "캐스팅 속도 14.0% 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "붉은빛",
+          "itemName": "찬란한 붉은빛 엠블렘[힘]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "붉은빛",
+          "itemName": "찬란한 붉은빛 엠블렘[힘]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "HAIR",
+      "slotName": "머리 아바타",
+      "itemId": "994691cc574b1bf51bd3b3d153f95d0b",
+      "itemName": "레어 머리 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "c457531e31c7b7f1e2d3361b08093922",
+        "itemName": "고스트 헌터의 흩날리는 머리[C타입]"
+      },
+      "optionAbility": "캐스팅 속도 14.0% 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "붉은빛",
+          "itemName": "찬란한 붉은빛 엠블렘[힘]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "붉은빛",
+          "itemName": "찬란한 붉은빛 엠블렘[힘]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "FACE",
+      "slotName": "얼굴 아바타",
+      "itemId": "35502e77e08d8b89cc33c5825a4b4d09",
+      "itemName": "레어 얼굴 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "a99bc384025fcfeb602c475c2d3a94eb",
+        "itemName": "고스트 헌터의 눈물자국[C타입]"
+      },
+      "optionAbility": "공격 속도 6.0% 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "노란빛",
+          "itemName": "찬란한 노란빛 엠블렘[공격속도]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "노란빛",
+          "itemName": "찬란한 노란빛 엠블렘[공격속도]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "JACKET",
+      "slotName": "상의 아바타",
+      "itemId": "c138b6c6215b94bfc2356b07ebcf17c7",
+      "itemName": "레어 상의 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "613b99e816969218f8ce2f65a690781e",
+        "itemName": "고스트 헌터의 롱코트[C타입]"
+      },
+      "optionAbility": "폭주 스킬Lv +1",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "플래티넘",
+          "itemName": "플래티넘 엠블렘[폭주]",
+          "itemRarity": "레전더리"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "녹색빛",
+          "itemName": "찬란한 녹색빛 엠블렘[물리크리티컬]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 3,
+          "slotColor": "녹색빛",
+          "itemName": "찬란한 녹색빛 엠블렘[물리크리티컬]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "PANTS",
+      "slotName": "하의 아바타",
+      "itemId": "b8312b0d57d2fd460e89ca86c7b31405",
+      "itemName": "레어 하의 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "8813c2c9186c52aeb38a13e3e160304b",
+        "itemName": "고스트 헌터의 찢어진 가죽바지[C타입]"
+      },
+      "optionAbility": "HP MAX 400 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "플래티넘",
+          "itemName": "플래티넘 엠블렘[폭주]",
+          "itemRarity": "레전더리"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "녹색빛",
+          "itemName": "찬란한 녹색빛 엠블렘[물리크리티컬]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 3,
+          "slotColor": "녹색빛",
+          "itemName": "찬란한 녹색빛 엠블렘[물리크리티컬]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "SHOES",
+      "slotName": "신발 아바타",
+      "itemId": "70ec668f3604f4f8e3bff35678defefa",
+      "itemName": "레어 신발 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "649693f8206f8e79fb837b42bcc47b99",
+        "itemName": "고스트 헌터의 벨트장식 부츠[C타입]"
+      },
+      "optionAbility": "힘 55 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "푸른빛",
+          "itemName": "찬란한 푸른빛 엠블렘[이동속도]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "푸른빛",
+          "itemName": "찬란한 푸른빛 엠블렘[이동속도]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "BREAST",
+      "slotName": "목가슴 아바타",
+      "itemId": "b4113b55e3e8f4d8b24bc7194f871426",
+      "itemName": "레어 목가슴 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "8885bf90dfb4c8956619ff69e2fd42d4",
+        "itemName": "고스트 헌터의 해골 대검[C타입]"
+      },
+      "optionAbility": "공격 속도 6.0% 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "노란빛",
+          "itemName": "찬란한 노란빛 엠블렘[공격속도]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "노란빛",
+          "itemName": "찬란한 노란빛 엠블렘[공격속도]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "WAIST",
+      "slotName": "허리 아바타",
+      "itemId": "69187eab4ecdbb29eaea864e94f70707",
+      "itemName": "레어 허리 클론 아바타",
+      "itemRarity": "레어",
+      "clone": {
+        "itemId": "47140dd256066aaaabc745c2b391274b",
+        "itemName": "고스트 헌터의 표창이 달린 벨트[C타입]"
+      },
+      "optionAbility": "회피율 5.5% 증가",
+      "emblems": [
+        {
+          "slotNo": 1,
+          "slotColor": "푸른빛",
+          "itemName": "찬란한 푸른빛 엠블렘[이동속도]",
+          "itemRarity": "유니크"
+        },
+        {
+          "slotNo": 2,
+          "slotColor": "푸른빛",
+          "itemName": "찬란한 푸른빛 엠블렘[이동속도]",
+          "itemRarity": "유니크"
+        }
+      ]
+    },
+    {
+      "slotId": "SKIN",
+      "slotName": "스킨 아바타",
+      "itemId": "a09115f440b42ab178330e6b9e49a9a7",
+      "itemName": "그을린 피부",
+      "itemRarity": "커먼",
+      "clone": {
+        "itemId": null,
+        "itemName": null
+      },
+      "optionAbility": "물리 방어력 1000 증가",
+      "emblems": []
+    }
+  ]
+}

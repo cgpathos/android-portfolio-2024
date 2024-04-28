@@ -1,0 +1,7 @@
+{
+  "error": {
+    "status": 401,
+    "code": "API000",
+    "message": "NOT_FOUND_APIKEY"
+  }
+}

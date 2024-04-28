@@ -1,0 +1,97 @@
+{
+  "itemId": "ITEM_ID",
+  "itemName": "무지강한 클로",
+  "itemRarity": "유니크",
+  "itemTypeId": "4ffb6f14b86f5c818a925bf58022686e",
+  "itemType": "무기",
+  "itemTypeDetailId": "f2ce85f03dddb5657c4823bc85c86859",
+  "itemTypeDetail": "클로",
+  "itemAvailableLevel": 85,
+  "itemExplain": "최종 데미지 24% 증가",
+  "itemExplainDetail": "최종 데미지 24% 증가",
+  "itemFlavorText": "",
+  "obtainInfo": {
+    "dungeon": [
+      {
+        "type": "일반 던전",
+        "rows": [
+          {
+            "name": "기타",
+            "details": [
+              "시나리오, 일반 던전 몬스터 사냥\n시나리오, 일반 던전에서 획득 시 아래의 제한 적용\r\n- 해체 불가\r\n- 상점 판매가 없음\r\n- 상점 재구매 불가"
+            ]
+          }
+        ]
+      }
+    ],
+    "shop": null
+  },
+  "setItemId": null,
+  "setItemName": null,
+  "itemStatus": [
+    {
+      "name": "모험가 명성",
+      "value": 84
+    },
+    {
+      "name": "물리 공격력",
+      "value": 939
+    },
+    {
+      "name": "마법 공격력",
+      "value": 939
+    },
+    {
+      "name": "독립 공격력",
+      "value": 561
+    },
+    {
+      "name": "힘",
+      "value": 100
+    },
+    {
+      "name": "지능",
+      "value": 51
+    },
+    {
+      "name": "물리 크리티컬 히트",
+      "value": "3%"
+    },
+    {
+      "name": "공격속성",
+      "value": "화"
+    },
+    {
+      "name": "내구도",
+      "value": 48
+    },
+    {
+      "name": "공격력 증가",
+      "value": "186.2%"
+    }
+  ],
+  "itemReinforceSkill": [
+    {
+      "jobName": "격투가(여)",
+      "jobId": "a7a059ebe9e6054c0644b40ef316d6e9",
+      "levelRange": [
+        {
+          "minLevel": 1,
+          "maxLevel": 85,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "jobName": "격투가(남)",
+      "jobId": "ca0f0e0e9e1d55b5f9955b03d9dd213c",
+      "levelRange": [
+        {
+          "minLevel": 1,
+          "maxLevel": 85,
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

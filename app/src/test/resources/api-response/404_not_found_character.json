@@ -1,0 +1,7 @@
+{
+  "error": {
+    "status": 404,
+    "code": "DNF001",
+    "message": "NOT_FOUND_CHARACTER"
+  }
+}

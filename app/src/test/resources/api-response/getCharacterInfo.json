@@ -1,0 +1,12 @@
+{
+  "characterId": "SERVER_ID",
+  "characterName": "사용자이름",
+  "level": 100,
+  "jobId": "123456",
+  "jobGrowId": "123456",
+  "jobName": "귀검사(남)",
+  "jobGrowName": "블러드 이블",
+  "adventureName": "모험단",
+  "guildId": "123456",
+  "guildName": "길드이름"
+}
