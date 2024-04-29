@@ -18,7 +18,7 @@ class NetworkFameRepository @Inject constructor(
     }
 
     override suspend fun getFameCharacterList(): List<Character> = withContext(dispatcher) {
-        dataSource.getCharacterFame().rows.toEntity()
+        dataSource.getCharacterFame().rows.toEntity().drop(5)
     }
 }
 

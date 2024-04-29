@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +37,7 @@ fun FameItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .padding(16.dp)
@@ -45,7 +45,7 @@ fun FameItem(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
+                .size(100.dp)
                 .background(
                     color = Color.Gray.copy(alpha = 0.4f),
                     shape = RoundedCornerShape(4.dp)
@@ -64,7 +64,7 @@ fun FameItem(
         }
 
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
             modifier = Modifier
                 .fillMaxWidth()
         ) {
@@ -73,28 +73,32 @@ fun FameItem(
                 textAlign = TextAlign.Center,
                 style = Typography.headlineSmall,
                 modifier = Modifier
-                    .fillMaxWidth()
             )
-            Text(
-                text = stringResource(id = R.string.level, level),
-                textAlign = TextAlign.Center,
-                style = Typography.bodyMedium,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
+                    .padding(start = 16.dp)
                     .fillMaxWidth()
-            )
-            Text(
-                text = jobGrowName,
-                textAlign = TextAlign.Center,
-                style = Typography.bodyMedium,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
+            ) {
+                Text(
+                    text = jobGrowName,
+                    textAlign = TextAlign.Center,
+                    style = Typography.bodyMedium,
+                    modifier = Modifier
+                )
+                Text(
+                    text = stringResource(id = R.string.level, level),
+                    textAlign = TextAlign.Center,
+                    style = Typography.bodySmall,
+                    modifier = Modifier
+                )
+            }
             Text(
                 text = stringResource(id = R.string.fame, fame),
                 textAlign = TextAlign.Center,
                 style = Typography.bodyMedium,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .padding(start = 16.dp)
             )
         }
     }

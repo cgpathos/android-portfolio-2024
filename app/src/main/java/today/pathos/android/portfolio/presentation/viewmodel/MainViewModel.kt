@@ -20,21 +20,22 @@ class MainViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(MainUiState.EMPTY_STATE)
     val state = _state
-        .onSubscription { getFameTop5() }
+        .onSubscription { initMain() }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = MainUiState.EMPTY_STATE
         )
 
-
-    private fun getFameTop5() {
+    private fun initMain() {
         viewModelScope.launch {
-            val list = repository.getTop5Fame()
+            val fameTop5List = repository.getTop5Fame()
+            val fameList = repository.getFameCharacterList()
 
             _state.update {
                 it.copy(
-                    fameTop5List = list
+                    fameTop5List = fameTop5List,
+                    fameList = fameList
                 )
             }
         }
@@ -43,10 +44,12 @@ class MainViewModel @Inject constructor(
 
 data class MainUiState(
     val fameTop5List: List<Character> = emptyList(),
+    val fameList: List<Character> = emptyList(),
 ) {
     companion object {
         val EMPTY_STATE = MainUiState(
-            fameTop5List = emptyList()
+            fameTop5List = emptyList(),
+            fameList = emptyList()
         )
     }
 }
