@@ -1,21 +1,15 @@
-package today.pathos.android.portfolio.data.datasource.remote.dto.res
+package today.pathos.android.portfolio.entity
 
 import kotlinx.serialization.Serializable
 import today.pathos.android.portfolio.entity.AvatarSlotId
 
-@Serializable
-data class ResAvatar(
+data class Avatar(
     val slotId: AvatarSlotId,
     val slotName: String,
     val itemId: String,
     val itemName: String,
+    val cloneItemId: String?,
+    val cloneItemName: String?,
     val itemRarity: String,
-    val clone: ResClone,
     val optionAbility: String?,
-)
-
-@Serializable
-data class ResClone(
-    val itemId: String?,
-    val itemName: String?,
 )

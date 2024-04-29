@@ -16,6 +16,8 @@ data class Character(
     val adventureName: String? = null,
     val guildId: String? = null,
     val guildName: String? = null,
+    val equipment: List<Equipment> = emptyList(),
+    val avatar: List<Avatar> = emptyList()
 ) {
 
     companion object {

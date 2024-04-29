@@ -4,7 +4,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import today.pathos.android.portfolio.data.repository.NetworkCharacterRepository
 import today.pathos.android.portfolio.data.repository.NetworkFameRepository
+import today.pathos.android.portfolio.domain.repository.CharacterRepository
 import today.pathos.android.portfolio.domain.repository.FameRepository
 
 @InstallIn(SingletonComponent::class)
@@ -15,4 +17,8 @@ abstract class DataModule {
         fameRepository: NetworkFameRepository,
     ): FameRepository
 
+    @Binds
+    abstract fun bindsCharacterRepository(
+        characterRepository: NetworkCharacterRepository,
+    ): CharacterRepository
 }

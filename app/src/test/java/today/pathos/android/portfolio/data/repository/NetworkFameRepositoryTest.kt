@@ -39,7 +39,9 @@ class NetworkFameRepositoryTest {
             jobGrowName = "jobGrowName",
         )
 
-        coEvery { dataSource.getCharacterFame(limit = 5) } returns ResRows(
+        coEvery {
+            dataSource.getCharacterFame(limit = 5)
+        } returns ResRows(
             rows = listOf(
                 dummyResCharacter,
                 dummyResCharacter,
