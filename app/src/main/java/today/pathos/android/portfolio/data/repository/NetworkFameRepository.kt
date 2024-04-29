@@ -18,7 +18,7 @@ class NetworkFameRepository @Inject constructor(
     }
 
     override suspend fun getFameCharacterList(): List<Character> = withContext(dispatcher) {
-        dataSource.getCharacterFame().rows.toEntity()
+        dataSource.getCharacterFame().rows.toEntity().drop(5)
     }
 }
 
@@ -26,12 +26,13 @@ private fun ResCharacter.toEntity() = Character(
     serverId = checkNotNull(serverId),
     characterId = characterId,
     characterName = characterName,
+    characterImage = Character.getCharacterImageUrl(serverId, characterId, 1),
     level = level,
     jobId = jobId,
     jobGrowId = jobGrowId,
     jobName = jobName,
     jobGrowName = jobGrowName,
-    fame = fame,
+    fame = fame ?: 0,
     adventureName = adventureName,
     guildId = guildId,
     guildName = guildName,

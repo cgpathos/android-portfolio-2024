@@ -1,10 +1,6 @@
-package today.pathos.android.portfolio.data.datasource.remote.dto.res
+package today.pathos.android.portfolio.entity
 
-import kotlinx.serialization.Serializable
-import today.pathos.android.portfolio.entity.EquipmentSlotId
-
-@Serializable
-data class ResEquipment(
+data class Equipment(
     val slotId: EquipmentSlotId,
     val slotName: String,
     val itemId: String,
