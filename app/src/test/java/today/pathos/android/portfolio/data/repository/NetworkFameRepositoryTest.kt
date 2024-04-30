@@ -21,7 +21,7 @@ class NetworkFameRepositoryTest {
     @Before
     fun setUp() {
         repository = NetworkFameRepository(
-            networkDataSource = dataSource,
+            dataSource = dataSource,
             dispatcher = testDispatcher
         )
     }
