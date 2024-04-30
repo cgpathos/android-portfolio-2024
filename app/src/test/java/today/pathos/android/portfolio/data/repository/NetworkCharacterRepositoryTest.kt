@@ -25,7 +25,7 @@ class NetworkCharacterRepositoryTest {
     @Before
     fun setUp() {
         repository = NetworkCharacterRepository(
-            networkDataSource = dataSource,
+            dataSource = dataSource,
             dispatcher = testDispatcher
         )
     }
