@@ -21,43 +21,9 @@ class NetworkFameRepositoryTest {
     @Before
     fun setUp() {
         repository = NetworkFameRepository(
-            dataSource = dataSource,
+            networkDataSource = dataSource,
             dispatcher = testDispatcher
         )
-    }
-
-    @Test
-    fun getFameTop5() = runTest(testDispatcher) {
-        val dummyResCharacter = ResCharacter(
-            serverId = "serverId",
-            characterId = "characterId",
-            characterName = "characterName",
-            level = 100,
-            jobId = "jobId",
-            jobGrowId = "jobGrowId",
-            jobName = "jobName",
-            jobGrowName = "jobGrowName",
-        )
-
-        coEvery {
-            dataSource.getCharacterFame(limit = 5)
-        } returns ResRows(
-            rows = listOf(
-                dummyResCharacter,
-                dummyResCharacter,
-                dummyResCharacter,
-                dummyResCharacter,
-                dummyResCharacter,
-            )
-        )
-
-        val expectedCount = 5
-
-        val result = repository.getTop5Fame()
-
-        assertEquals(expectedCount, result.size)
-
-        coVerify { dataSource.getCharacterFame(limit = 5) }
     }
 
     @Test

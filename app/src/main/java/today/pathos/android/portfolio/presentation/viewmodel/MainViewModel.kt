@@ -29,13 +29,12 @@ class MainViewModel @Inject constructor(
 
     private fun initMain() {
         viewModelScope.launch {
-            val fameTop5List = repository.getTop5Fame()
             val fameList = repository.getFameCharacterList()
 
             _state.update {
                 it.copy(
-                    fameTop5List = fameTop5List,
-                    fameList = fameList
+                    fameTop5List = fameList.take(5),
+                    fameList = fameList.drop(5)
                 )
             }
         }

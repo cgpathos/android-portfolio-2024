@@ -11,7 +11,7 @@ class GetCharacterInfoUseCase @Inject constructor(
         serverId: String,
         characterId: String,
     ): Character {
-        val characterInfo = characterRepository.getCharacterInfo(serverId, characterId)
+        val characterInfo = characterRepository.getCharacter(serverId, characterId)
         val equipment = characterRepository.getCharacterEquipment(serverId, characterId)
         val avatar = characterRepository.getCharacterAvatar(serverId, characterId)
 

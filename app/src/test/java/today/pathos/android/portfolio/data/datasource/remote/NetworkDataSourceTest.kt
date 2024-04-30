@@ -129,7 +129,7 @@ class NetworkDataSourceTest {
         val expectedCharacterName = "사용자이름"
         val expectedLevel = 100
 
-        val result = dataSource.getCharacterInfo(
+        val result = dataSource.getCharacter(
             serverId = serverId,
             characterId = characterId,
         )

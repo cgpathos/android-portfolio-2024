@@ -3,35 +3,39 @@ package today.pathos.android.portfolio.data.repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import today.pathos.android.portfolio.core.di.IoDispatcher
+import today.pathos.android.portfolio.data.datasource.local.LocalDataSource
+import today.pathos.android.portfolio.data.datasource.local.db.table.FameTbl
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
-import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResCharacter
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
 import javax.inject.Inject
 
-class NetworkFameRepository @Inject constructor(
-    private val dataSource: NetworkDataSource,
+class OfflineFirstFameRepository @Inject constructor(
+    private val localDataSource: LocalDataSource,
+    private val networkDataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : FameRepository {
     override suspend fun getFameCharacterList(): List<Character> = withContext(dispatcher) {
-        dataSource.getCharacterFame().rows.toEntity()
+        if (localDataSource.isFameListEmpty()) {
+            val result = networkDataSource.getCharacterFame().rows
+            localDataSource.createFameList(result)
+        }
+
+        localDataSource.getFameList().toEntity()
     }
 }
 
-private fun ResCharacter.toEntity() = Character(
-    serverId = checkNotNull(serverId),
+private fun FameTbl.toEntity() = Character(
+    serverId = serverId,
     characterId = characterId,
     characterName = characterName,
-    characterImage = Character.getCharacterImageUrl(serverId, characterId, 3),
+    characterImage = characterImage,
     level = level,
     jobId = jobId,
     jobGrowId = jobGrowId,
     jobName = jobName,
     jobGrowName = jobGrowName,
-    fame = fame ?: 0,
-    adventureName = adventureName,
-    guildId = guildId,
-    guildName = guildName,
+    fame = fame,
 )
 
-private fun List<ResCharacter>.toEntity() = map { it.toEntity() }
+private fun List<FameTbl>.toEntity() = map { it.toEntity() }
