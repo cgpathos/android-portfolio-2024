@@ -1,6 +1,5 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,7 +33,6 @@ class CharacterInfoViewModel @Inject constructor(
         )
 
     private fun initInfo() {
-        Log.i("TAG", "[$serverId]:$characterId ")
         viewModelScope.launch {
             val characterInfo = getCharacterInfoUseCase(serverId, characterId)
             val armorList = characterInfo.equipment

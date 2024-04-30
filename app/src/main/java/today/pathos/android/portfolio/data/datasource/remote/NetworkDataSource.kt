@@ -25,7 +25,7 @@ class NetworkDataSource @Inject constructor(
         limit: Int,
     ): ResRows<ResCharacter> = apiService.searchCharacter(serverId, characterName, limit)
 
-    suspend fun getCharacterInfo(
+    suspend fun getCharacter(
         serverId: String,
         characterId: String,
     ): ResCharacter = apiService.getCharacterInfo(serverId, characterId)

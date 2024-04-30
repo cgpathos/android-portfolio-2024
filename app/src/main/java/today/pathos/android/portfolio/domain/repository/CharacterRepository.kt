@@ -5,7 +5,7 @@ import today.pathos.android.portfolio.entity.Character
 import today.pathos.android.portfolio.entity.Equipment
 
 interface CharacterRepository {
-    suspend fun getCharacterInfo(
+    suspend fun getCharacter(
         serverId: String,
         characterId: String,
     ): Character

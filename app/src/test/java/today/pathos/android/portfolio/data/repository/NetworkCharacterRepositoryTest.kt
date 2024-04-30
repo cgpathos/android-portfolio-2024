@@ -25,7 +25,7 @@ class NetworkCharacterRepositoryTest {
     @Before
     fun setUp() {
         repository = NetworkCharacterRepository(
-            dataSource = dataSource,
+            networkDataSource = dataSource,
             dispatcher = testDispatcher
         )
     }
@@ -36,7 +36,7 @@ class NetworkCharacterRepositoryTest {
         val characterId = "CHARACTER_ID"
 
         coEvery {
-            dataSource.getCharacterInfo(serverId, characterId)
+            dataSource.getCharacter(serverId, characterId)
         } returns ResCharacter(
             serverId = serverId,
             characterId = characterId,
@@ -50,12 +50,12 @@ class NetworkCharacterRepositoryTest {
         val expectedServerId = "SERVER_ID"
         val expectedCharacterId = "CHARACTER_ID"
 
-        val result = repository.getCharacterInfo(serverId, characterId)
+        val result = repository.getCharacter(serverId, characterId)
 
         assertEquals(expectedServerId, result.serverId)
         assertEquals(expectedCharacterId, result.characterId)
 
-        coVerify { dataSource.getCharacterInfo(serverId, characterId) }
+        coVerify { dataSource.getCharacter(serverId, characterId) }
     }
 
     @Test
