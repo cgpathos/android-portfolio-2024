@@ -5,7 +5,7 @@ import kotlinx.coroutines.withContext
 import today.pathos.android.portfolio.data.datasource.local.LocalDataSource
 import today.pathos.android.portfolio.data.datasource.local.db.table.FameTbl
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
-import today.pathos.android.portfolio.data.di.IoDispatcher
+import today.pathos.android.portfolio.domain.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
 import javax.inject.Inject

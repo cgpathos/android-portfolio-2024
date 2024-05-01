@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResCharacter
-import today.pathos.android.portfolio.data.di.IoDispatcher
+import today.pathos.android.portfolio.domain.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
 import javax.inject.Inject
