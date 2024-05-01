@@ -1,4 +1,7 @@
 <resources>
+    <string name="app_name">Android Portfolio 2024</string>
+
+    <string name="btn_confirm">확인</string>
     <string name="level">Lv.%,d</string>
     <string name="fame">명성치 : %,d</string>
     <string name="lbl_guild_name">&lt;%s&gt;</string>

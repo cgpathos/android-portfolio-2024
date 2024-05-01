@@ -1,34 +1,25 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onSubscription
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
+import today.pathos.android.portfolio.presentation.viewmodel.state.MainEffectProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    mainEffectProvider: MainEffectProvider,
     private val repository: FameRepository,
-) : ViewModel() {
+) : BaseViewModel(mainEffectProvider) {
 
     private val _state = MutableStateFlow(MainUiState.EMPTY_STATE)
-    val state = _state
-        .onSubscription { initMain() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = MainUiState.EMPTY_STATE
-        )
+    val state = _state.asStateFlow()
 
-    private fun initMain() {
-        viewModelScope.launch {
+    init {
+        launchWithMainState {
             val fameList = repository.getFameCharacterList()
 
             _state.update {

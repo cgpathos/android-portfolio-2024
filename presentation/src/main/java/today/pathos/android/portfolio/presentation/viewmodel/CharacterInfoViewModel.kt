@@ -1,38 +1,39 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onSubscription
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import today.pathos.android.portfolio.domain.usecase.GetCharacterInfoUseCase
 import today.pathos.android.portfolio.entity.Character
+import today.pathos.android.portfolio.presentation.view.Screens
+import today.pathos.android.portfolio.presentation.viewmodel.state.ActionEffect
+import today.pathos.android.portfolio.presentation.viewmodel.state.MainEffectProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class CharacterInfoViewModel @Inject constructor(
     savedState: SavedStateHandle,
+    private val mainEffectProvider: MainEffectProvider,
     private val getCharacterInfoUseCase: GetCharacterInfoUseCase,
-) : ViewModel() {
+) : BaseViewModel(mainEffectProvider) {
     private val serverId: String = checkNotNull(savedState["serverId"])
     private val characterId: String = checkNotNull(savedState["characterId"])
 
     private val _state = MutableStateFlow(CharacterInfoUiState.EMPTY_STATE)
-    val state = _state
-        .onSubscription { initInfo() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = CharacterInfoUiState.EMPTY_STATE
-        )
+    val state = _state.asStateFlow()
 
-    private fun initInfo() {
-        viewModelScope.launch {
+    init {
+        launchWithMainState(
+            errorCallback = {
+                mainEffectProvider.tryAction(
+                    ActionEffect.NavigateTo(
+                        postDest = Screens.NavigateUp
+                    )
+                )
+            }
+        ) {
             val characterInfo = getCharacterInfoUseCase(serverId, characterId)
             val armorList = characterInfo.equipment
                 .filter { it.itemType == "방어구" }

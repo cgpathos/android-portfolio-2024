@@ -7,7 +7,7 @@ import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.CharacterTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.EquipmentTbl
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
-import today.pathos.android.portfolio.data.di.IoDispatcher
+import today.pathos.android.portfolio.domain.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.CharacterRepository
 import today.pathos.android.portfolio.entity.Avatar
 import today.pathos.android.portfolio.entity.Character

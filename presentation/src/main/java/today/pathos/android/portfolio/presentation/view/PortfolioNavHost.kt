@@ -93,13 +93,5 @@ fun PortfolioNavHost(
         ) {
             CharacterInfoRoute()
         }
-
-//        dialog(
-//            route = OpenStoreDialog.route
-//        ) {
-//            OpenStoreRoute(
-//                onDismiss = { navController.navigateUp() }
-//            )
-//        }
     }
 }

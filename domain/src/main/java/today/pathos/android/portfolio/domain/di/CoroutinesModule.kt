@@ -1,4 +1,4 @@
-package today.pathos.android.portfolio.data.di
+package today.pathos.android.portfolio.domain.di
 
 import dagger.Module
 import dagger.Provides
