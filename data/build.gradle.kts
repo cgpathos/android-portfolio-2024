@@ -1,26 +1,24 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.androidxRoom)
+    alias(libs.plugins.secrets)
 }
 
 android {
-    namespace = "today.pathos.android.portfolio"
+    namespace = "today.pathos.android.portfolio.data"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "today.pathos.android.portfolio"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0"
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -36,23 +34,24 @@ android {
     }
     buildFeatures {
         buildConfig = true
-        compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeKotlinCompiler.get()
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE*.md}"
+            excludes += "/META-INF/{LICENSE*.md}"
         }
     }
 }
 
+secrets {
+    defaultPropertiesFileName = "local.defaults.properties"
+}
+
 dependencies {
-    implementation(project(":presentation"))
     implementation(project(":entity"))
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     // hilt
     implementation(libs.dagger.hilt.android)
@@ -66,11 +65,24 @@ dependencies {
     implementation(libs.bundles.kotlin)
     testImplementation(libs.bundles.kotlin.test)
 
-    implementation(libs.core.ktx)
+    // api
+    implementation(libs.bundles.retrofit)
+    testImplementation(libs.mockwebserver)
 
-    implementation(libs.androidx.activity.compose)
+    // database
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
 
-    // compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose)
+    implementation(libs.androidx.datastore)
+
+    // test
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.agent)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.agent)
 }

@@ -1,26 +1,21 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "today.pathos.android.portfolio"
+    namespace = "today.pathos.android.portfolio.presentation"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "today.pathos.android.portfolio"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0"
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,18 +36,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeKotlinCompiler.get()
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE*.md}"
-        }
-    }
 }
 
 dependencies {
-    implementation(project(":presentation"))
     implementation(project(":entity"))
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     // hilt
     implementation(libs.dagger.hilt.android)
@@ -62,15 +50,12 @@ dependencies {
     testImplementation(libs.dagger.hilt.android.testing)
     kspTest(libs.dagger.hilt.android.compiler)
 
-    // kotlin
-    implementation(libs.bundles.kotlin)
-    testImplementation(libs.bundles.kotlin.test)
-
-    implementation(libs.core.ktx)
-
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
     // compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.bundles.compose.android.test)
+    debugImplementation(libs.bundles.compose.ui.test)
 }
