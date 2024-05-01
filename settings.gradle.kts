@@ -20,3 +20,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Android Portfolio 2024"
 include(":app")
+include(":domain")
+include(":entity")
+include(":data")
+include(":presentation")

@@ -1,0 +1,22 @@
+# 자동으로 되서 주석처리
+#name: cleanup-merged-branch
+#
+#on:
+#  pull_request:
+#    types: [ closed ]
+#    branches:
+#      - 'feat/**'
+#
+#jobs:
+#  delete_branch:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Delete merged branch
+#        if: github.event.pull_request.merged == true
+#        id: open-pr
+#        run: |
+#          git branch -d ${{ github.event.pull_request.head.ref }}
+#          git push origin --delete ${{ github.event.pull_request.head.ref }}
