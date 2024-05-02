@@ -21,19 +21,20 @@ class MainViewModel @Inject constructor(
     repository: FameRepository,
 ) : ViewModel() {
 
-    val state: StateFlow<Result<MainUiState>> = mainUiState(repository)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = Result.Loading
-        )
+    val state: StateFlow<Result<MainUiState>> =
+        mainUiState(repository)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Eagerly,
+                initialValue = Result.Loading
+            )
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
 private fun mainUiState(
     repository: FameRepository,
-): Flow<Result<MainUiState>> {
-    return repository.getFameCharacterListFlow()
+): Flow<Result<MainUiState>> =
+    repository.getFameCharacterListFlow()
         .flatMapLatest {
             flowOf(
                 MainUiState(
@@ -42,7 +43,6 @@ private fun mainUiState(
                 )
             )
         }.asResult()
-}
 
 data class MainUiState(
     val fameTop5List: List<Character> = emptyList(),

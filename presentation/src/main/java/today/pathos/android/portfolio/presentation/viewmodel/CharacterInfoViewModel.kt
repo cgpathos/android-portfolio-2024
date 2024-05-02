@@ -4,36 +4,52 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import today.pathos.android.portfolio.domain.usecase.GetCharacterInfoUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
+import today.pathos.android.portfolio.common.result.Result
+import today.pathos.android.portfolio.common.result.asResult
+import today.pathos.android.portfolio.domain.usecase.GetCharacterInfoFlowUseCase
 import today.pathos.android.portfolio.entity.Character
+import today.pathos.android.portfolio.presentation.viewmodel.state.ActionEffect
+import today.pathos.android.portfolio.presentation.viewmodel.state.ActionEffectProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class CharacterInfoViewModel @Inject constructor(
     savedState: SavedStateHandle,
-    private val getCharacterInfoUseCase: GetCharacterInfoUseCase,
+    actionEffectProvider: ActionEffectProvider,
+    getCharacterInfoFlowUseCase: GetCharacterInfoFlowUseCase,
 ) : ViewModel() {
     private val serverId: String = checkNotNull(savedState["serverId"])
     private val characterId: String = checkNotNull(savedState["characterId"])
 
-    private val _state = MutableStateFlow(CharacterInfoUiState.EMPTY_STATE)
-    val state = _state.asStateFlow()
+    val state: StateFlow<Result<CharacterInfoUiState>> =
+        characterInfoUiState(
+            serverId,
+            characterId,
+            getCharacterInfoFlowUseCase,
+            actionEffectProvider
+        ).stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = Result.Loading
+        )
+}
 
-    init {
-        viewModelScope.launch {
-//            errorCallback = {
-//                mainEffectProvider.tryAction(
-//                    ActionEffect.NavigateTo(
-//                        postDest = Screens.NavigateUp
-//                    )
-//                )
-//            }
-
-            val characterInfo = getCharacterInfoUseCase(serverId, characterId)
+@OptIn(ExperimentalCoroutinesApi::class)
+private fun characterInfoUiState(
+    serverId: String,
+    characterId: String,
+    getCharacterInfoFlowUseCase: GetCharacterInfoFlowUseCase,
+    actionEffectProvider: ActionEffectProvider,
+): Flow<Result<CharacterInfoUiState>> =
+    getCharacterInfoFlowUseCase(serverId, characterId)
+        .flatMapLatest { characterInfo ->
             val armorList = characterInfo.equipment
                 .filter { it.itemType == "방어구" }
                 .map { equipment ->
@@ -50,17 +66,22 @@ class CharacterInfoViewModel @Inject constructor(
                         reinforce = equipment.reinforce.takeIf { it > 0 }
                     )
                 }
-
-            _state.update {
-                it.copy(
+            flowOf(
+                CharacterInfoUiState(
                     characterInfo = characterInfo,
                     armorList = armorList,
                     accessoryList = accessoryList
                 )
+            )
+        }.asResult(
+            errorCallback = {
+                actionEffectProvider.tryAction(
+                    ActionEffect.NavigateTo(
+                        postDest = Screens.NavigateUp
+                    )
+                )
             }
-        }
-    }
-}
+        )
 
 data class CharacterInfoUiState(
     val characterInfo: Character,

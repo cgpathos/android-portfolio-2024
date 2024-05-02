@@ -1,14 +1,18 @@
 package today.pathos.android.portfolio.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
+import today.pathos.android.portfolio.common.di.IoDispatcher
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResAvatar
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResCharacter
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResEquipment
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResItem
-import today.pathos.android.portfolio.common.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.CharacterRepository
+import today.pathos.android.portfolio.entity.Avatar
 import today.pathos.android.portfolio.entity.Character
 import today.pathos.android.portfolio.entity.Equipment
 import today.pathos.android.portfolio.entity.Item
@@ -18,26 +22,29 @@ class NetworkCharacterRepository @Inject constructor(
     private val dataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : CharacterRepository {
-    override suspend fun getCharacter(
+    override fun getCharacterFlow(
         serverId: String,
         characterId: String,
-    ): Character = withContext(dispatcher) {
-        dataSource.getCharacter(serverId, characterId).toEntity(serverId)
-    }
+    ): Flow<Character> =
+        flow {
+            emit(dataSource.getCharacter(serverId, characterId).toEntity(serverId))
+        }.flowOn(dispatcher)
 
-    override suspend fun getCharacterEquipment(
+    override fun getCharacterEquipmentFlow(
         serverId: String,
         characterId: String,
-    ): List<Equipment> = withContext(dispatcher) {
-        dataSource.getCharacterEquipment(serverId, characterId).equipment.toEntity()
-    }
+    ): Flow<List<Equipment>> =
+        flow {
+            emit(dataSource.getCharacterEquipment(serverId, characterId).equipment.toEntity())
+        }.flowOn(dispatcher)
 
-    override suspend fun getCharacterAvatar(
+    override fun getCharacterAvatarFlow(
         serverId: String,
         characterId: String,
-    ): List<today.pathos.android.portfolio.entity.Avatar> = withContext(dispatcher) {
-        dataSource.getCharacterAvatar(serverId, characterId).avatar.toEntity()
-    }
+    ): Flow<List<Avatar>> =
+        flow {
+            emit(dataSource.getCharacterAvatar(serverId, characterId).avatar.toEntity())
+        }.flowOn(dispatcher)
 
     override suspend fun getItemInfo(itemId: String): Item = withContext(dispatcher) {
         dataSource.getItemInfo(itemId).toEntity()

@@ -8,22 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import today.pathos.android.portfolio.presentation.state.PortfolioAppState
-import today.pathos.android.portfolio.presentation.view.Screens.CharacterInfo
-import today.pathos.android.portfolio.presentation.view.Screens.Main
-import today.pathos.android.portfolio.presentation.view.Screens.NavigateUp
-import today.pathos.android.portfolio.presentation.view.Screens.Splash
 import today.pathos.android.portfolio.presentation.view.screen.CharacterInfoRoute
 import today.pathos.android.portfolio.presentation.view.screen.MainRoute
 import today.pathos.android.portfolio.presentation.view.screen.SplashRoute
-
-enum class Screens(
-    val route: String,
-) {
-    NavigateUp(route = "navigate_up"), // 뒤로가기 처리용
-    Splash(route = "splash"),
-    Main(route = "main"),
-    CharacterInfo(route = "character_info/{serverId}/{characterId}")
-}
+import today.pathos.android.portfolio.presentation.viewmodel.Screens.CharacterInfo
+import today.pathos.android.portfolio.presentation.viewmodel.Screens.Main
+import today.pathos.android.portfolio.presentation.viewmodel.Screens.NavigateUp
+import today.pathos.android.portfolio.presentation.viewmodel.Screens.Splash
 
 fun NavHostController.navigateTo(
     route: String,

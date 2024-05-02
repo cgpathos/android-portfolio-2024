@@ -1,6 +1,7 @@
 package today.pathos.android.portfolio.presentation.viewmodel.state
 
-import today.pathos.android.portfolio.presentation.view.Screens
+import today.pathos.android.portfolio.presentation.viewmodel.Screens
+
 
 sealed class ActionEffect {
     data object Idle : ActionEffect()

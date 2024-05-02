@@ -11,8 +11,8 @@ sealed interface Result<out T> {
     data object Loading : Result<Nothing>
 }
 
-fun <T> Flow<T>.asResult(): Flow<Result<T>> =
+fun <T> Flow<T>.asResult(errorCallback: ((e: Throwable) -> Unit)? = null): Flow<Result<T>> =
     map<T, Result<T>> { Result.Success(it) }
         .onStart { Result.Loading }
-        .catch { Result.Error(it) }
+        .catch { Result.Error(it, errorCallback) }
 

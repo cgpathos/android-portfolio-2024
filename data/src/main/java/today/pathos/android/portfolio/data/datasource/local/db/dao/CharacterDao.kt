@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.CharacterTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.EquipmentTbl
@@ -20,10 +21,10 @@ abstract class CharacterDao {
     ): Boolean
 
     @Query("SELECT * FROM CHARACTER_TBL WHERE server_id = :serverId and character_id = :characterId")
-    abstract suspend fun getCharacter(
+    abstract fun getCharacter(
         serverId: String,
         characterId: String,
-    ): CharacterTbl
+    ): Flow<CharacterTbl>
 
     @Upsert
     abstract suspend fun upsertEquipment(equipmentList: List<EquipmentTbl>)
@@ -35,10 +36,10 @@ abstract class CharacterDao {
     ): Boolean
 
     @Query("SELECT * FROM EQUIPMENT_TBL WHERE server_id = :serverId and character_id = :characterId")
-    abstract suspend fun getCharacterEquipment(
+    abstract fun getCharacterEquipment(
         serverId: String,
         characterId: String,
-    ): List<EquipmentTbl>
+    ): Flow<List<EquipmentTbl>>
 
     @Upsert
     abstract suspend fun upsertAvatar(equipmentList: List<AvatarTbl>)
@@ -50,8 +51,8 @@ abstract class CharacterDao {
     ): Boolean
 
     @Query("SELECT * FROM AVATAR_TBL WHERE server_id = :serverId and character_id = :characterId")
-    abstract suspend fun getCharacterAvatar(
+    abstract fun getCharacterAvatar(
         serverId: String,
         characterId: String,
-    ): List<AvatarTbl>
+    ): Flow<List<AvatarTbl>>
 }
