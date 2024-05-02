@@ -1,6 +1,9 @@
 package today.pathos.android.portfolio.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import today.pathos.android.portfolio.data.datasource.local.LocalDataSource
 import today.pathos.android.portfolio.data.datasource.local.db.table.FameTbl
@@ -15,6 +18,10 @@ class OfflineFirstFameRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : FameRepository {
+    override fun getFameCharacterListFlow(): Flow<List<Character>> = flow {
+        emit(localDataSource.getFameList().toEntity())
+    }.flowOn(dispatcher)
+
     override suspend fun getFameCharacterList(): List<Character> = withContext(dispatcher) {
         if (localDataSource.isFameListEmpty()) {
             val result = networkDataSource.getCharacterFame().rows

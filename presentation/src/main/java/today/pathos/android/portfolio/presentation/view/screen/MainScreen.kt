@@ -32,7 +32,7 @@ fun MainRoute(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.newStyleState.collectAsState()
 
     MainScreen(
         state = state,
