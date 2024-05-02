@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "today.pathos.android.portfolio.domain"
+    namespace = "today.pathos.android.portfolio.common"
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,18 +32,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":entity"))
-
     // hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
-    androidTestImplementation(libs.dagger.hilt.android.testing)
-    kspAndroidTest(libs.dagger.hilt.android.compiler)
-    testImplementation(libs.dagger.hilt.android.testing)
-    kspTest(libs.dagger.hilt.android.compiler)
 
     // kotlin
-    implementation(libs.bundles.kotlin)
     testImplementation(libs.bundles.kotlin.test)
 }

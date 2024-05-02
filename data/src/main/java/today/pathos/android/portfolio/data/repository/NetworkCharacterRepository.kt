@@ -7,7 +7,8 @@ import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResAvatar
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResCharacter
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResEquipment
 import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResItem
-import today.pathos.android.portfolio.domain.di.IoDispatcher
+import today.pathos.android.portfolio.common.di.IoDispatcher
+import today.pathos.android.portfolio.domain.repository.CharacterRepository
 import today.pathos.android.portfolio.entity.Character
 import today.pathos.android.portfolio.entity.Equipment
 import today.pathos.android.portfolio.entity.Item
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class NetworkCharacterRepository @Inject constructor(
     private val dataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-) : today.pathos.android.portfolio.domain.repository.CharacterRepository {
+) : CharacterRepository {
     override suspend fun getCharacter(
         serverId: String,
         characterId: String,
