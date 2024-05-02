@@ -3,6 +3,7 @@ package today.pathos.android.portfolio.data.datasource.local.db.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.data.datasource.local.db.table.FameTbl
 
 @Dao
@@ -14,6 +15,6 @@ abstract class FameDao {
     abstract suspend fun fameListCount(): Int
 
     @Query("SELECT * FROM FAME_TBL")
-    abstract suspend fun getFameList(): List<FameTbl>
+    abstract fun getFameList(): Flow<List<FameTbl>>
 
 }

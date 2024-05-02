@@ -5,5 +5,4 @@ import today.pathos.android.portfolio.entity.Character
 
 interface FameRepository {
     fun getFameCharacterListFlow(): Flow<List<Character>>
-    suspend fun getFameCharacterList(): List<Character>
 }

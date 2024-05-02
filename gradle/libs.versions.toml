@@ -5,6 +5,7 @@ ksp = "1.9.23-1.0.19"
 kotlin = "1.9.23"
 kotlinxDatetime = "0.5.0"
 kotlinxSerializationJson = "1.6.3"
+turbine = "1.1.0"
 
 secrets = "2.0.1"
 
@@ -42,6 +43,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
@@ -88,7 +90,7 @@ mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk" }
 
 [bundles]
 kotlin = ["kotlinx-coroutines-core", "kotlinx-datetime", "kotlinx-serialization"]
-kotlin-test = ["kotlinx-coroutines-test"]
+kotlin-test = ["kotlinx-coroutines-test", "turbine"]
 
 compose = [
     "androidx-navigation-compose", "androidx-hilt-navigation-compose",

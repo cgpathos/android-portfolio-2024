@@ -15,8 +15,8 @@ import androidx.compose.ui.window.DialogProperties
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoadingDialog(
-    onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
 ) {
     BasicAlertDialog(
         onDismissRequest = onDismiss,

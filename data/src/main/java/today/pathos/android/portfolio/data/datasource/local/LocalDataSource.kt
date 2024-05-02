@@ -1,5 +1,6 @@
 package today.pathos.android.portfolio.data.datasource.local
 
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.data.datasource.local.db.dao.CharacterDao
 import today.pathos.android.portfolio.data.datasource.local.db.dao.FameDao
 import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
@@ -18,7 +19,7 @@ class LocalDataSource @Inject constructor(
     suspend fun isFameListEmpty(): Boolean =
         fameDao.fameListCount() == 0
 
-    suspend fun getFameList(): List<FameTbl> =
+    fun getFameList(): Flow<List<FameTbl>> =
         fameDao.getFameList()
 
     suspend fun createFameList(characterList: List<ResCharacter>) {
