@@ -1,8 +1,10 @@
 package today.pathos.android.portfolio.data.repository
 
+import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -50,8 +52,7 @@ class NetworkCharacterRepositoryTest {
         val expectedServerId = "SERVER_ID"
         val expectedCharacterId = "CHARACTER_ID"
 
-        val result = repository.getCharacter(serverId, characterId)
-
+        val result = repository.getCharacterFlow(serverId, characterId).first()
         assertEquals(expectedServerId, result.serverId)
         assertEquals(expectedCharacterId, result.characterId)
 
@@ -93,9 +94,11 @@ class NetworkCharacterRepositoryTest {
         )
         val expectedEquipmentCount = 4
 
-        val result = repository.getCharacterEquipment(serverId, characterId)
-
-        assertEquals(expectedEquipmentCount, result.size)
+        repository.getCharacterEquipmentFlow(serverId, characterId)
+            .test {
+                assertEquals(expectedEquipmentCount, awaitItem().size)
+                awaitComplete()
+            }
 
         coVerify { dataSource.getCharacterEquipment(serverId, characterId) }
     }
@@ -130,9 +133,11 @@ class NetworkCharacterRepositoryTest {
         )
         val expectedEquipmentCount = 5
 
-        val result = repository.getCharacterAvatar(serverId, characterId)
-
-        assertEquals(expectedEquipmentCount, result.size)
+        repository.getCharacterAvatarFlow(serverId, characterId)
+            .test {
+                assertEquals(expectedEquipmentCount, awaitItem().size)
+                awaitComplete()
+            }
 
         coVerify { dataSource.getCharacterAvatar(serverId, characterId) }
     }

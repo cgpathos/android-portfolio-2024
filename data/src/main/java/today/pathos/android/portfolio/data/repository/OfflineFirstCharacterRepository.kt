@@ -1,13 +1,17 @@
 package today.pathos.android.portfolio.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
+import today.pathos.android.portfolio.common.di.IoDispatcher
 import today.pathos.android.portfolio.data.datasource.local.LocalDataSource
 import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.CharacterTbl
 import today.pathos.android.portfolio.data.datasource.local.db.table.EquipmentTbl
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
-import today.pathos.android.portfolio.domain.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.CharacterRepository
 import today.pathos.android.portfolio.entity.Avatar
 import today.pathos.android.portfolio.entity.Character
@@ -20,42 +24,38 @@ class OfflineFirstCharacterRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : CharacterRepository {
-    override suspend fun getCharacter(
-        serverId: String,
-        characterId: String,
-    ): Character = withContext(dispatcher) {
-        if (localDataSource.isCharacterEmpty(serverId, characterId)) {
-            val result = networkDataSource.getCharacter(serverId, characterId)
-            localDataSource.createCharacter(serverId, result)
+    override fun getCharacterFlow(serverId: String, characterId: String): Flow<Character> =
+        localDataSource.getCharacter(serverId, characterId)
+            .onStart {
+                if (localDataSource.isCharacterEmpty(serverId, characterId)) {
+                    val result = networkDataSource.getCharacter(serverId, characterId)
+                    localDataSource.createCharacter(serverId, result)
+                }
+            }
+            .map { it.toEntity() }
+            .flowOn(dispatcher)
 
-        }
+    override fun getCharacterEquipmentFlow(serverId: String, characterId: String): Flow<List<Equipment>> =
+        localDataSource.getCharacterEquipment(serverId, characterId)
+            .onStart {
+                if (localDataSource.isCharacterEquipmentEmpty(serverId, characterId)) {
+                    val result = networkDataSource.getCharacterEquipment(serverId, characterId).equipment
+                    localDataSource.createCharacterEquipment(serverId, characterId, result)
+                }
+            }
+            .map { it.toEntity() }
+            .flowOn(dispatcher)
 
-        localDataSource.getCharacter(serverId, characterId).toEntity()
-    }
-
-    override suspend fun getCharacterEquipment(
-        serverId: String,
-        characterId: String,
-    ): List<Equipment> = withContext(dispatcher) {
-        if (localDataSource.isCharacterEquipmentEmpty(serverId, characterId)) {
-            val result = networkDataSource.getCharacterEquipment(serverId, characterId).equipment
-            localDataSource.createCharacterEquipment(serverId, characterId, result)
-        }
-
-        localDataSource.getCharacterEquipment(serverId, characterId).toEntity()
-    }
-
-    override suspend fun getCharacterAvatar(
-        serverId: String,
-        characterId: String,
-    ): List<Avatar> = withContext(dispatcher) {
-        if (localDataSource.isCharacterAvatarEmpty(serverId, characterId)) {
-            val result = networkDataSource.getCharacterAvatar(serverId, characterId).avatar
-            localDataSource.createCharacterAvatar(serverId, characterId, result)
-        }
-
-        localDataSource.getCharacterAvatar(serverId, characterId).toEntity()
-    }
+    override fun getCharacterAvatarFlow(serverId: String, characterId: String): Flow<List<Avatar>> =
+        localDataSource.getCharacterAvatar(serverId, characterId)
+            .onStart {
+                if (localDataSource.isCharacterAvatarEmpty(serverId, characterId)) {
+                    val result = networkDataSource.getCharacterAvatar(serverId, characterId).avatar
+                    localDataSource.createCharacterAvatar(serverId, characterId, result)
+                }
+            }
+            .map { it.toEntity() }
+            .flowOn(dispatcher)
 
     override suspend fun getItemInfo(itemId: String): Item = withContext(dispatcher) {
         TODO()

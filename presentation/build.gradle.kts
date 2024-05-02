@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":entity"))
     implementation(project(":domain"))
 

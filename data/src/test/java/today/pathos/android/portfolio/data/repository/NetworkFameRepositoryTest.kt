@@ -1,5 +1,6 @@
 package today.pathos.android.portfolio.data.repository
 
+import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -51,9 +52,11 @@ class NetworkFameRepositoryTest {
 
         val expectedCount = 5
 
-        val result = repository.getFameCharacterList()
-
-        assertEquals(expectedCount, result.size)
+        repository.getFameCharacterListFlow()
+            .test {
+                assertEquals(expectedCount, awaitItem().size)
+                awaitComplete()
+            }
 
         coVerify { dataSource.getCharacterFame() }
     }

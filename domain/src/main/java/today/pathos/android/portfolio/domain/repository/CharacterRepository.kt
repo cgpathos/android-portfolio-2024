@@ -1,24 +1,25 @@
 package today.pathos.android.portfolio.domain.repository
 
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.entity.Avatar
 import today.pathos.android.portfolio.entity.Character
 import today.pathos.android.portfolio.entity.Equipment
 
 interface CharacterRepository {
-    suspend fun getCharacter(
+    fun getCharacterFlow(
         serverId: String,
         characterId: String,
-    ): Character
+    ): Flow<Character>
 
-    suspend fun getCharacterEquipment(
+    fun getCharacterEquipmentFlow(
         serverId: String,
         characterId: String,
-    ): List<Equipment>
+    ): Flow<List<Equipment>>
 
-    suspend fun getCharacterAvatar(
+    fun getCharacterAvatarFlow(
         serverId: String,
         characterId: String,
-    ): List<Avatar>
+    ): Flow<List<Avatar>>
 
     suspend fun getItemInfo(
         itemId: String,

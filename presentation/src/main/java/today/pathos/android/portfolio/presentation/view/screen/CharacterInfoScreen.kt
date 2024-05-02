@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import today.pathos.android.portfolio.presentation.composable.UiStateHandler
 import today.pathos.android.portfolio.presentation.view.character.CharacterWithEquipment
 import today.pathos.android.portfolio.presentation.viewmodel.CharacterInfoUiState
 import today.pathos.android.portfolio.presentation.viewmodel.CharacterInfoViewModel
@@ -20,10 +21,12 @@ fun CharacterInfoRoute(
 ) {
     val state by viewModel.state.collectAsState()
 
-    CharacterInfoScreen(
-        state = state,
-        modifier = modifier
-    )
+    UiStateHandler(result = state) {
+        CharacterInfoScreen(
+            state = it,
+            modifier = modifier
+        )
+    }
 }
 
 @Composable

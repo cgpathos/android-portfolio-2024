@@ -1,11 +1,14 @@
 package today.pathos.android.portfolio.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import today.pathos.android.portfolio.common.di.IoDispatcher
 import today.pathos.android.portfolio.data.datasource.local.LocalDataSource
 import today.pathos.android.portfolio.data.datasource.local.db.table.FameTbl
 import today.pathos.android.portfolio.data.datasource.remote.NetworkDataSource
-import today.pathos.android.portfolio.domain.di.IoDispatcher
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
 import javax.inject.Inject
@@ -15,14 +18,18 @@ class OfflineFirstFameRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : FameRepository {
-    override suspend fun getFameCharacterList(): List<Character> = withContext(dispatcher) {
-        if (localDataSource.isFameListEmpty()) {
-            val result = networkDataSource.getCharacterFame().rows
-            localDataSource.createFameList(result)
-        }
-
-        localDataSource.getFameList().toEntity()
-    }
+    override fun getFameCharacterListFlow(): Flow<List<Character>> =
+        localDataSource.getFameList()
+            .onStart {
+                if (localDataSource.isFameListEmpty()) {
+                    networkDataSource.getCharacterFame()
+                        .rows
+                        .let { localDataSource.createFameList(it) }
+                }
+            }
+            .map {
+                it.toEntity()
+            }.flowOn(dispatcher)
 }
 
 private fun FameTbl.toEntity() = Character(

@@ -1,7 +1,8 @@
 package today.pathos.android.portfolio.domain.repository
 
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.entity.Character
 
 interface FameRepository {
-    suspend fun getFameCharacterList(): List<Character>
+    fun getFameCharacterListFlow(): Flow<List<Character>>
 }

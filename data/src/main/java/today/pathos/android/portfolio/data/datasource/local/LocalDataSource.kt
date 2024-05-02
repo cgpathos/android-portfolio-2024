@@ -1,5 +1,6 @@
 package today.pathos.android.portfolio.data.datasource.local
 
+import kotlinx.coroutines.flow.Flow
 import today.pathos.android.portfolio.data.datasource.local.db.dao.CharacterDao
 import today.pathos.android.portfolio.data.datasource.local.db.dao.FameDao
 import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
@@ -18,7 +19,7 @@ class LocalDataSource @Inject constructor(
     suspend fun isFameListEmpty(): Boolean =
         fameDao.fameListCount() == 0
 
-    suspend fun getFameList(): List<FameTbl> =
+    fun getFameList(): Flow<List<FameTbl>> =
         fameDao.getFameList()
 
     suspend fun createFameList(characterList: List<ResCharacter>) {
@@ -44,10 +45,10 @@ class LocalDataSource @Inject constructor(
         characterId: String,
     ): Boolean = characterDao.hasCharacter(serverId, characterId).not()
 
-    suspend fun getCharacter(
+    fun getCharacter(
         serverId: String,
         characterId: String,
-    ): CharacterTbl = characterDao.getCharacter(serverId, characterId)
+    ): Flow<CharacterTbl> = characterDao.getCharacter(serverId, characterId)
 
     suspend fun createCharacter(
         serverId: String,
@@ -73,10 +74,10 @@ class LocalDataSource @Inject constructor(
         characterId: String,
     ): Boolean = characterDao.hasCharacterEquipment(serverId, characterId).not()
 
-    suspend fun getCharacterEquipment(
+    fun getCharacterEquipment(
         serverId: String,
         characterId: String,
-    ): List<EquipmentTbl> = characterDao.getCharacterEquipment(serverId, characterId)
+    ): Flow<List<EquipmentTbl>> = characterDao.getCharacterEquipment(serverId, characterId)
 
     suspend fun createCharacterEquipment(
         serverId: String,
@@ -115,10 +116,10 @@ class LocalDataSource @Inject constructor(
         characterId: String,
     ): Boolean = characterDao.hasCharacterAvatar(serverId, characterId).not()
 
-    suspend fun getCharacterAvatar(
+    fun getCharacterAvatar(
         serverId: String,
         characterId: String,
-    ): List<AvatarTbl> = characterDao.getCharacterAvatar(serverId, characterId)
+    ): Flow<List<AvatarTbl>> = characterDao.getCharacterAvatar(serverId, characterId)
 
     suspend fun createCharacterAvatar(
         serverId: String,

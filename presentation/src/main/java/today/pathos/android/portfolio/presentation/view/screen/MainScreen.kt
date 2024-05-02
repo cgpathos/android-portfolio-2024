@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import today.pathos.android.portfolio.presentation.R
+import today.pathos.android.portfolio.presentation.composable.UiStateHandler
 import today.pathos.android.portfolio.presentation.view.fame.FameCarousel
 import today.pathos.android.portfolio.presentation.view.item.FameItem
 import today.pathos.android.portfolio.presentation.viewmodel.MainUiState
@@ -34,11 +35,13 @@ fun MainRoute(
 ) {
     val state by viewModel.state.collectAsState()
 
-    MainScreen(
-        state = state,
-        onClickCharacterInfo = onClickCharacterInfo,
-        modifier = modifier
-    )
+    UiStateHandler(result = state) {
+        MainScreen(
+            state = it,
+            onClickCharacterInfo = onClickCharacterInfo,
+            modifier = modifier
+        )
+    }
 }
 
 @Composable
