@@ -10,22 +10,21 @@ import androidx.compose.runtime.getValue
 import dagger.hilt.android.AndroidEntryPoint
 import today.pathos.android.portfolio.presentation.view.PortfolioApp
 import today.pathos.android.portfolio.presentation.view.theme.TemplateAndroidTheme
-import today.pathos.android.portfolio.presentation.viewmodel.state.MainEffectProvider
+import today.pathos.android.portfolio.presentation.viewmodel.state.ActionEffectProvider
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var mainEffectProvider: MainEffectProvider
+    lateinit var actionEffectProvider: ActionEffectProvider
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val mainEffect by mainEffectProvider.mainEffect.collectAsState()
-            val actionEffect by mainEffectProvider.actionEffect.collectAsState()
+            val actionEffect by actionEffectProvider.actionEffect.collectAsState()
 
             TemplateAndroidTheme {
                 PortfolioApp(

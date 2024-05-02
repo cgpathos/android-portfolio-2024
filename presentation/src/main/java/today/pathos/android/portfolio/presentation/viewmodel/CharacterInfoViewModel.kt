@@ -1,23 +1,22 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import today.pathos.android.portfolio.domain.usecase.GetCharacterInfoUseCase
 import today.pathos.android.portfolio.entity.Character
-import today.pathos.android.portfolio.presentation.view.Screens
-import today.pathos.android.portfolio.presentation.viewmodel.state.ActionEffect
-import today.pathos.android.portfolio.presentation.viewmodel.state.MainEffectProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class CharacterInfoViewModel @Inject constructor(
     savedState: SavedStateHandle,
-    private val mainEffectProvider: MainEffectProvider,
     private val getCharacterInfoUseCase: GetCharacterInfoUseCase,
-) : BaseViewModel(mainEffectProvider) {
+) : ViewModel() {
     private val serverId: String = checkNotNull(savedState["serverId"])
     private val characterId: String = checkNotNull(savedState["characterId"])
 
@@ -25,15 +24,15 @@ class CharacterInfoViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        launchWithMainState(
-            errorCallback = {
-                mainEffectProvider.tryAction(
-                    ActionEffect.NavigateTo(
-                        postDest = Screens.NavigateUp
-                    )
-                )
-            }
-        ) {
+        viewModelScope.launch {
+//            errorCallback = {
+//                mainEffectProvider.tryAction(
+//                    ActionEffect.NavigateTo(
+//                        postDest = Screens.NavigateUp
+//                    )
+//                )
+//            }
+
             val characterInfo = getCharacterInfoUseCase(serverId, characterId)
             val armorList = characterInfo.equipment
                 .filter { it.itemType == "방어구" }

@@ -1,5 +1,6 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,16 +14,14 @@ import today.pathos.android.portfolio.common.result.Result
 import today.pathos.android.portfolio.common.result.asResult
 import today.pathos.android.portfolio.domain.repository.FameRepository
 import today.pathos.android.portfolio.entity.Character
-import today.pathos.android.portfolio.presentation.viewmodel.state.MainEffectProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    mainEffectProvider: MainEffectProvider,
     repository: FameRepository,
-) : BaseViewModel(mainEffectProvider) {
+) : ViewModel() {
 
-    val state: StateFlow<Result<MainUiState>> = mainUiState(mainEffectProvider, repository)
+    val state: StateFlow<Result<MainUiState>> = mainUiState(repository)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -32,12 +31,10 @@ class MainViewModel @Inject constructor(
 
 @OptIn(ExperimentalCoroutinesApi::class)
 private fun mainUiState(
-    mainEffectProvider: MainEffectProvider,
     repository: FameRepository,
 ): Flow<Result<MainUiState>> {
     return repository.getFameCharacterListFlow()
         .flatMapLatest {
-            mainEffectProvider.idle()
             flowOf(
                 MainUiState(
                     fameTop5List = it.take(5),
