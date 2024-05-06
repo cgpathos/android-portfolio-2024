@@ -4,8 +4,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import today.pathos.android.portfolio.data.repository.OfflineFirstCacheRepository
 import today.pathos.android.portfolio.data.repository.OfflineFirstCharacterRepository
 import today.pathos.android.portfolio.data.repository.OfflineFirstFameRepository
+import today.pathos.android.portfolio.domain.repository.CacheRepository
 import today.pathos.android.portfolio.domain.repository.CharacterRepository
 import today.pathos.android.portfolio.domain.repository.FameRepository
 
@@ -21,4 +23,9 @@ abstract class RepositoryModule {
     abstract fun bindsCharacterRepository(
         characterRepository: OfflineFirstCharacterRepository,
     ): CharacterRepository
+
+    @Binds
+    abstract fun bindsCacheRepository(
+        cacheRepository: OfflineFirstCacheRepository,
+    ): CacheRepository
 }

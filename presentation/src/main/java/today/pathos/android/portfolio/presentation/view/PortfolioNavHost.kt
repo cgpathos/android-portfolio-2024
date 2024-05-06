@@ -53,13 +53,16 @@ fun PortfolioNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = Main.route, // fixme: Splash 구현 끝나면 추가
+        startDestination = Splash.route, // fixme: Splash 구현 끝나면 추가
         modifier = modifier
     ) {
         composable(
             route = Splash.route
         ) {
-            SplashRoute()
+            SplashRoute(
+                navigateToMain = { navController.navigateTo(Main.route, cleanHistory = true) },
+                closeApp = closeApp
+            )
         }
 
         composable(

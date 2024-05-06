@@ -1,5 +1,6 @@
 package today.pathos.android.portfolio.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -7,8 +8,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import today.pathos.android.portfolio.common.result.Result
 import today.pathos.android.portfolio.common.result.asResult
@@ -23,6 +27,9 @@ class MainViewModel @Inject constructor(
 
     val state: StateFlow<Result<MainUiState>> =
         mainUiState(repository)
+            .onStart { Log.w("UiStateHandler", ":start") }
+            .onEach { Log.w("UiStateHandler", ":emit") }
+            .distinctUntilChanged()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.Eagerly,

@@ -1,6 +1,7 @@
 package today.pathos.android.portfolio.data.datasource.local
 
 import kotlinx.coroutines.flow.Flow
+import today.pathos.android.portfolio.data.datasource.local.db.CacheDatabase
 import today.pathos.android.portfolio.data.datasource.local.db.dao.CharacterDao
 import today.pathos.android.portfolio.data.datasource.local.db.dao.FameDao
 import today.pathos.android.portfolio.data.datasource.local.db.table.AvatarTbl
@@ -13,6 +14,7 @@ import today.pathos.android.portfolio.data.datasource.remote.dto.res.ResEquipmen
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
+    private val database: CacheDatabase,
     private val fameDao: FameDao,
     private val characterDao: CharacterDao,
 ) {
@@ -142,5 +144,9 @@ class LocalDataSource @Inject constructor(
                 )
             }
         )
+    }
+
+    suspend fun cleanCache() {
+        database.clearAllTables()
     }
 }
