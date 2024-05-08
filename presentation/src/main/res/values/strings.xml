@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Android Portfolio 2024</string>
+
+    <string name="btn_confirm">확인</string>
+    <string name="level">Lv.%,d</string>
+    <string name="fame">명성치 : %,d</string>
+    <string name="lbl_guild_name">&lt;%s&gt;</string>
+    <string name="lbl_server_character_name">[%1$s] %2$s</string>
+    <string name="lbl_level_job">Lv.%1$d %2$s</string>
+    <string name="lbl_reinforce">+%,d</string>
+
+    <string name="character_image_url">https://img-api.neople.co.kr/df/servers/%1$s/characters/%2$s?zoom=%3$d</string>
+    <string name="item_image_url">https://img-api.neople.co.kr/df/items/%1$s</string>
+</resources>

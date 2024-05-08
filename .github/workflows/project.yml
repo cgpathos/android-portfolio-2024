@@ -1,0 +1,41 @@
+name: project
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'feat**/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.pull_request.number }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  all:
+    uses: ./.github/workflows/test.yml
+    with:
+      module: ''
+    secrets: inherit
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Assemble apk
+        run: bundle exec fastlane build build_type:"Debug"
+
