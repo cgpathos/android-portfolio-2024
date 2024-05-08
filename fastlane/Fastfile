@@ -23,7 +23,7 @@ platform :android do
   end
 
   desc "Check Build app file"
-  land :build do |options|
+  lane :build do |options|
     BUILD_TYPE = options[:build_type] || "Debug"
     gradle(
       tasks: ["clean", "assemble#{BUILD_TYPE}"]
