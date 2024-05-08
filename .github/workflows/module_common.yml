@@ -1,4 +1,4 @@
-name: module_data
+name: module_common
 
 on:
   push:
