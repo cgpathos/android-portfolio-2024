@@ -18,8 +18,22 @@ default_platform(:android)
 platform :android do
   desc "Runs all the tests"
   lane :test do |options|
+    TASK =
+      if options[:module] = ""
+        "test"
+      else
+        ":#{options[:module]}:test"
+      end
     MODULE = ":#{options[:module]}:" || ""
-    gradle(task: "#{MODULE}test")
+    gradle(tasks: ["clean", TASK])
+  end
+
+  desc "Check Build app file"
+  lane :build do |options|
+    BUILD_TYPE = options[:build_type] || "Debug"
+    gradle(
+      tasks: ["clean", "assemble#{BUILD_TYPE}"]
+    )
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"

@@ -1,14 +1,23 @@
-name: test
+name: project
 
 on:
-  workflow_call:
-    inputs:
-      module:
-        required: false
-        type: string
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'feat**/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.pull_request.number }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  unit_test:
+  all:
+    uses: ./.github/workflows/test.yml
+    with:
+      module: ''
+    secrets: inherit
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,5 +36,6 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
-      - name: Run all tests
-        run: bundle exec fastlane test module:"${{ inputs.module }}"
+      - name: Assemble apk
+        run: bundle exec fastlane build build_type:"Debug"
+
