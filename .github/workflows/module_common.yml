@@ -1,0 +1,24 @@
+name: module_data
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - "common/**"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "common/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.pull_request.number }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    with:
+      module: 'common'
+    secrets: inherit

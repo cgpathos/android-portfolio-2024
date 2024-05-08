@@ -1,0 +1,24 @@
+name: module_data
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - "data/**"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "data/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.pull_request.number }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    with:
+      module: 'data'
+    secrets: inherit
