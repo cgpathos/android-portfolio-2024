@@ -18,8 +18,14 @@ default_platform(:android)
 platform :android do
   desc "Runs all the tests"
   lane :test do |options|
+    TASK =
+      if options[:module] = ""
+        "test"
+      else
+        ":#{options[:module]}:test"
+      end
     MODULE = ":#{options[:module]}:" || ""
-    gradle(task: "#{MODULE}test")
+    gradle(tasks: ["clean", TASK])
   end
 
   desc "Check Build app file"
