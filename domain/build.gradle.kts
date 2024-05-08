@@ -38,10 +38,6 @@ dependencies {
     // hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
-    androidTestImplementation(libs.dagger.hilt.android.testing)
-    kspAndroidTest(libs.dagger.hilt.android.compiler)
-    testImplementation(libs.dagger.hilt.android.testing)
-    kspTest(libs.dagger.hilt.android.compiler)
 
     // kotlin
     implementation(libs.bundles.kotlin)

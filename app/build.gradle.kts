@@ -63,7 +63,6 @@ dependencies {
 
     // kotlin
     implementation(libs.bundles.kotlin)
-    testImplementation(libs.bundles.kotlin.test)
 
     implementation(libs.core.ktx)
 

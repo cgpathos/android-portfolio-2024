@@ -3,7 +3,6 @@ package today.pathos.android.portfolio.common.result
 import app.cash.turbine.test
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
