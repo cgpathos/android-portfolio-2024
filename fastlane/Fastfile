@@ -22,6 +22,14 @@ platform :android do
     gradle(task: "#{MODULE}test")
   end
 
+  desc "Check Build app file"
+  land :build do |options|
+    BUILD_TYPE = options[:build_type] || "Debug"
+    gradle(
+      tasks: ["clean", "assemble#{BUILD_TYPE}"]
+    )
+  end
+
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")
