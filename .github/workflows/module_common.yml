@@ -6,11 +6,6 @@ on:
       - '**'
     paths:
       - "common/**"
-  pull_request:
-    branches:
-      - "**"
-    paths:
-      - "common/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.pull_request.number }}-${{ github.ref }}
