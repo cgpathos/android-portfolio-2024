@@ -1,4 +1,5 @@
 # Android Portfolio 2024
+[![project](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/project.yml/badge.svg?event=push)](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/project.yml)
 
 [![module_common](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/module_common.yml/badge.svg?event=push)](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/module_common.yml)
 [![module_data](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/module_data.yml/badge.svg?event=push)](https://github.com/cgpathos/android-portfolio-2024/actions/workflows/module_data.yml)
